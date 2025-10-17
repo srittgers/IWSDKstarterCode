@@ -1,19 +1,11 @@
-
-
 import {
   AssetType,
   Mesh,
-  MeshBasicMaterial,
   MeshStandardMaterial,
   SphereGeometry,
-  PlaneGeometry,
   SessionMode,
-  SRGBColorSpace,
   AssetManager,
   World,
-  DirectionalLight,
-  AmbientLight,
-  PointLight
 } from '@iwsdk/core';
 
 import {
@@ -22,14 +14,17 @@ import {
   MovementMode,
   Interactable,
   PanelUI,
-  PlaybackMode,
   ScreenSpace
 } from '@iwsdk/core';
 
-
-import { EnvironmentType, LocomotionEnvironment } from '@iwsdk/core';
+import { 
+  EnvironmentType, 
+  LocomotionEnvironment 
+} from '@iwsdk/core';
 
 import { PanelSystem } from './panel.js';
+
+
 
 const assets = {
   plantSansevieria: {
@@ -39,17 +34,28 @@ const assets = {
   },
 };
 
+
 World.create(document.getElementById('scene-container'), {
   assets,
   xr: {
     sessionMode: SessionMode.ImmersiveVR,
-    //offer: 'always',
+    offer: 'always',
     // Optional structured features; layers/local-floor are offered by default
-    //features: { handTracking: true, layers: true } 
+    features: { 
+      handTracking: false, 
+      layers: true } 
   },
-  //features: { locomotion: { useWorker: true }, grabbing: true, physics: false, sceneUnderstanding: false },
-  //level: "/glxf/Composition1.glxf",  
+
+  features: { locomotion: false, 
+    grabbing: false, 
+    physics: false, 
+    sceneUnderstanding: false },
+
+  // import scene created in Meta Spatial Editor
+  // level: "/glxf/Composition.glxf",
+
 }).then((world) => {
+
   const { camera } = world;
 
   
@@ -65,20 +71,15 @@ World.create(document.getElementById('scene-container'), {
       // })
     ;
   
-  // add the plant 3d model
+  // Add a plant 3d model
   const { scene: plantMesh } = AssetManager.getGLTF('plantSansevieria');
   plantMesh.position.set(1.2, 0.85, -1.8);
-  world
-    .createTransformEntity(plantMesh)
-    // .addComponent(Interactable)
-    // .addComponent(DistanceGrabbable, {
-    //   movementMode: MovementMode.MoveFromTarget
-    // })
-    ;
+  world.createTransformEntity(plantMesh);
 
 
+
+  // Register all systems that were imported
   world.registerSystem(PanelSystem);
-
 
 
 
