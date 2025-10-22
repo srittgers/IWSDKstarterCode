@@ -13,7 +13,9 @@
 	"customizations": {
 		// Configure properties specific to VS Code.
 		"vscode": {
-			"settings": {},
+			"settings": {
+				"terminal.integrated.cwd": "${workspaceFolder}/iwsdk-app"
+			},
 			"extensions": [
 				"streetsidesoftware.code-spell-checker"
 			]
