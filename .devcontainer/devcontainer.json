@@ -19,4 +19,7 @@
 			]
 		}
 	},
+
+	// Run commands after the container is created
+	"postCreateCommand": "cd iwsdk-app && npm install"
 }
