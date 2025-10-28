@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [
     injectIWER({
       device: 'metaQuest3',
-      verbose: true 
+      verbose: true,
+      activation: 'always',
     }),
     compileUIKit({ sourceDir: 'ui', outputDir: 'public/ui', verbose: true }),
     optimizeGLTF({
